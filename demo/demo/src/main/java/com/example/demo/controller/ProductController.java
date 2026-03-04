@@ -1,0 +1,44 @@
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.models.ProductModel;
+import com.example.demo.service.ProductService;
+
+
+@RestController
+@RequestMapping("/produtos")
+public class ProductController {
+    @Autowired
+    private ProductService productService;
+
+    @GetMapping
+    public List<ProductModel> consultarProdutos(){
+        return productService.consultarProdutos();
+    }
+
+    @PostMapping
+    public ProductModel cadastrarProduto(@RequestBody ProductModel productModel){
+        return productService.cadastrarProduto(productModel);
+    }
+    
+    @PutMapping("/{id}")
+    public List<ProductModel> atualizarProduto(@PathVariable String id, @RequestBody ProductModel productModel) {
+       return productService.atualizarProduto(id, productModel);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletarProduto(@PathVariable String id){
+        productService.deletarProduto(id);
+    }
+}
