@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.models.ProductModel;
 import com.example.demo.repository.ProductRepository;
 
-import jakarta.annotation.Nullable;
 
 @Service
 public class ProductService {
@@ -25,16 +24,12 @@ public class ProductService {
         return productRepository.findAll(sort);   
     }
 
-    @Nullable
     public ProductModel cadastrarProduto(ProductModel productModel){
-        if(!productRepository.findById(productModel.getId()).isPresent()){
             return productRepository.save(productModel);
-        }
 
-        return null;
     }
 
-    public List<ProductModel> atualizarProduto(String id, ProductModel produtoAtualizado){
+    public List<ProductModel> atualizarProduto(Long id, ProductModel produtoAtualizado){
         ProductModel produtoExistente = productRepository.findById(id)
         .orElseThrow(NoSuchElementException::new);
 
@@ -48,7 +43,7 @@ public class ProductService {
         return consultarProdutos();
     }
 
-    public List<ProductModel> deletarProduto(String id){
+    public List<ProductModel> deletarProduto(Long id){
         if(productRepository.existsById(id)){
             productRepository.deleteById(id);
         } return consultarProdutos();

@@ -33,12 +33,12 @@ public class ProductController {
     }
     
     @PutMapping("/{id}")
-    public List<ProductModel> atualizarProduto(@PathVariable String id, @RequestBody ProductModel productModel) {
+    public List<ProductModel> atualizarProduto(@PathVariable Long id, @RequestBody ProductModel productModel) {
        return productService.atualizarProduto(id, productModel);
     }
 
     @DeleteMapping("/{id}")
-    public void deletarProduto(@PathVariable String id){
+    public void deletarProduto(@PathVariable Long id){
         productService.deletarProduto(id);
     }
 }
