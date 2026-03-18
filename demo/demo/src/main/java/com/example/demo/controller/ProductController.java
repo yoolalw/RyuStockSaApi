@@ -29,7 +29,7 @@ public class ProductController {
         return productService.consultarProdutos();
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ProductModel cadastrarProduto(@RequestBody ProductModel productModel){
         return productService.cadastrarProduto(productModel);
     }
